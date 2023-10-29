@@ -1,5 +1,6 @@
 package com.example.dividend.scraper;
 
+import com.example.dividend.exception.impl.NoCompanyException;
 import com.example.dividend.model.Company;
 import com.example.dividend.model.Dividend;
 import com.example.dividend.model.ScrapedResult;
@@ -62,7 +63,7 @@ public class YahooFinanceScraper implements Scraper{
             scrapResult.setDividends(dividends);
 
         } catch (IOException e) {
-            // TODO
+
             throw new RuntimeException(e);
         }
 
@@ -82,6 +83,8 @@ public class YahooFinanceScraper implements Scraper{
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoCompanyException();
         }
         return null;
     }
